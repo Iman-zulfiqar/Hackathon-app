@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
-
 function FormButton({icon=<PoweroffOutlined/>,
-isIcon=true,bgcolor='#ffffff',
+isIcon=true,
+bgcolor='#ffffff',
 text='submit',
 textcolor='#262626',
 borderstyles='1px solid grey',
 size='large',
-clickHanddler}) {
+clickHanddler,
+type='button'
+}) {
     const [loadings, setLoadings] = useState([]);
     const enterLoading = (index) => {
       setLoadings((prevLoadings) => {
@@ -38,6 +40,7 @@ clickHanddler}) {
                
             }
            }
+           htmlType={type}
           icon={isIcon ? icon : false}
           size={size}
           loading={loadings[1]}
