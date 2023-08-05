@@ -7,7 +7,8 @@ isIcon=true,bgcolor='#ffffff',
 text='submit',
 textcolor='#262626',
 borderstyles='1px solid grey',
-size='large'}) {
+size='large',
+clickHanddler}) {
     const [loadings, setLoadings] = useState([]);
     const enterLoading = (index) => {
       setLoadings((prevLoadings) => {
@@ -40,7 +41,7 @@ size='large'}) {
           icon={isIcon ? icon : false}
           size={size}
           loading={loadings[1]}
-          onClick={() => enterLoading(1)}
+          onClick={() =>{ clickHanddler()}}
         >
           {text}
         </Button>
