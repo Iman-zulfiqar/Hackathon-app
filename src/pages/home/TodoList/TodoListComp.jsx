@@ -26,7 +26,7 @@ function TodoListComp({searchValue}) {
     'normal' : 2,
   
   }
-  const ListData = (filteredData.length != 0 && searchValue != '') ? filteredData : sortedData
+  const ListData = (searchValue != '') ? filteredData : sortedData
   function customSort (task1, task2) 
      {
       return priorities[task1.priority] - priorities[task2.priority];
@@ -45,7 +45,7 @@ useEffect(()=>{
    },[])
   return (
     <div className="w-[80%] bg-[#d3d3d3] rounded-2xl mx-auto gap-x-4 flex flex-wrap p-8 shadow-md gap-y-2" style={{height:'70vh'}}>
-       { ListData.map((item, index)=>{
+       {ListData.length !=0 ? ListData.map((item, index)=>{
         return  <ListItem key={index} title={item.title}
         extra= {<MenuDropdown options={{items}} />}
         width='300px' 
@@ -62,7 +62,7 @@ useEffect(()=>{
             return '#ffff62'
           }
         })()}></ListItem>
-       })}
+       }): <p>No data found please try with exact case...</p>}
        </div>
   )
 }

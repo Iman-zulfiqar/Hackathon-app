@@ -18,7 +18,7 @@ export const getData = ({setSortedData,customSort})=>{
 }
 
 export const postData = ({clickHanddler,item})=>{
-    fetch('https://63aaa3b8fdc006ba6047ae79.mockapi.io/todos', {  
+    fetch(`${base_url}`, {  
         method: 'POST', 
         headers : { 
             'Content-Type': 'application/json',
