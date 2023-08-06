@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import {  Modal } from 'antd';
 import FormButton from '../form/FormButton';
 import { deleteData } from '../../apis';
-function DeleteModalComp({open,setOpen}) {
+function DeleteModalComp({open,setOpen,setSortedData,customSort}) {
    
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Are you sure you wanna delete this item?');
@@ -15,10 +15,10 @@ function DeleteModalComp({open,setOpen}) {
         setConfirmLoading(false);
       }, 2000);
     };
-    const handleCancel = () => {
+    function handleCancel() {
       console.log('Clicked cancel button');
       setOpen(false);
-    };
+    }
     return (
       <>
         <Modal
@@ -51,8 +51,8 @@ function DeleteModalComp({open,setOpen}) {
          borderstyles='none'
          size='medium'
          clickHanddler={()=>{
-             setOpen(!open); 
-            deleteData();
+         
+            deleteData({setOpen,setSortedData,customSort});
          }}
          type='button'
          /></div>

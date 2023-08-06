@@ -35,19 +35,15 @@ export const postData = ({clickHanddler,item,setSortedData,customSort})=>{
     )
 }
 
-export const deleteData = ({clickHanddler,id,setSortedData,customSort})=>{
-    fetch(`${base_url}:${id}`, {  
+export const deleteData = ({setOpen,setSortedData,customSort})=>{
+    const id = localStorage.getItem('id');
+    fetch(`https://63aaa3b8fdc006ba6047ae79.mockapi.io/todos/${id}`, {  
         method: 'DELETE', 
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           },
-        mode: 'cors', 
     }).then(()=>{
         getData({setSortedData,customSort});
     }
     ).then(()=>{
-        clickHanddler();
+        setOpen(false);
     }
     )
 }

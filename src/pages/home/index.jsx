@@ -43,7 +43,7 @@ useEffect(()=>{
         
         <AddTodoItem setSortedData={setSortedData} customSort={customSort} />
         </div>
-       <TodoListComp ListData={ListData} />
+       <TodoListComp ListData={ListData} setSortedData={setSortedData} customSort={customSort} />
        
      
     </div></>
