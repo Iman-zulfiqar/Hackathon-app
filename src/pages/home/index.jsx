@@ -1,13 +1,14 @@
 
 import NavbarComp from "./navbar/NavbarComp"
 import {  Input } from 'antd';
+import {useState} from 'react'
 import TodoListComp from "./TodoList/TodoListComp";
 import AddTodoItem from './TodoList/AddTodoItem'
 import './style.css'
 const { Search } = Input;
-const onSearch = (value) => console.log(value);
-
 function TodoList() {
+  const [searchValue, setSearchValue]= useState();
+  const onSearch = (value) =>{ setSearchValue(value)};
   return (
    <>  <NavbarComp></NavbarComp>
     <div className="h-[90vh] flex flex-col justify-center gap-4 items-center">
@@ -16,7 +17,7 @@ function TodoList() {
         
         <AddTodoItem/>
         </div>
-       <TodoListComp/>
+       <TodoListComp searchValue={searchValue} />
        
      
     </div></>

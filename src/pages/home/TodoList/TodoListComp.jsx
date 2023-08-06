@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ListItem from "../../../components/list/ListItem";
 import MenuDropdown from "../../../components/list/MenuDropdown";
-function TodoListComp() {
+function TodoListComp({searchValue}) {
 
   const [sortedData, setSortedData]=useState([]);
   function customSort (task1, task2) 
@@ -10,14 +10,20 @@ function TodoListComp() {
   }
 let  priorities = 
 {
-  'urgent' : 0, 
-  'critical' : 1,
+  'urgent' : 1, 
+  'critical' : 0,
   'normal' : 2,
 
 }
-
-
-  
+const [filteredData,setfilteredData]= useState([]);
+useEffect(()=>{
+ if (searchValue != '') {
+ const data= sortedData.filter((item)=>{
+    return  item.title.includes(searchValue) || item.description.includes(searchValue)
+  })
+  setfilteredData(data);
+  }
+},[searchValue])
   const items = [
    {
      label: <a href="https://www.antgroup.com">Delete</a>,
@@ -41,20 +47,19 @@ let  priorities =
      }
      )
        .then(function(response){
-         console.log(response)
          return response.json();
        })
        .then(function(myJson) {
-         console.log( myJson);
          setSortedData(myJson.sort(customSort))
        });
    }
+   const ListData = filteredData.length != 0 ? filteredData : sortedData
    useEffect(()=>{
      getData()
    },[])
   return (
     <div className="w-[80%] bg-[#d3d3d3] rounded-2xl mx-auto gap-x-4 flex flex-wrap p-8 shadow-md gap-y-2" style={{height:'70vh'}}>
-       { sortedData.map((item, index)=>{
+       { ListData.map((item, index)=>{
         return  <ListItem key={index} title={item.title}
         extra= {<MenuDropdown options={{items}} />}
         width='300px' 
