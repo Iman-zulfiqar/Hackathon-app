@@ -41,7 +41,7 @@ useEffect(()=>{
        <div className="w-[80%] flex  items-center gap-3 mx-auto">
         <Search placeholder="type to search..." size="large" className="max-w-[300px] w-full bg-[#e6e6e6]  rounded-2xl self-start" onSearch={onSearch} />
         
-        <AddTodoItem/>
+        <AddTodoItem setSortedData={setSortedData} customSort={customSort} />
         </div>
        <TodoListComp ListData={ListData} />
        

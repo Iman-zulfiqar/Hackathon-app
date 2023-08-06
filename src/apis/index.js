@@ -17,7 +17,7 @@ export const getData = ({setSortedData,customSort})=>{
       });
 }
 
-export const postData = ({clickHanddler,item})=>{
+export const postData = ({clickHanddler,item,setSortedData,customSort})=>{
     fetch(`${base_url}`, {  
         method: 'POST', 
         headers : { 
@@ -27,6 +27,9 @@ export const postData = ({clickHanddler,item})=>{
         mode: 'cors', 
         body: JSON.stringify(item) 
     }).then(()=>{
+        getData({setSortedData,customSort});
+    }
+    ).then(()=>{
         clickHanddler();
     }
     )

@@ -4,14 +4,13 @@ import FormButton from './FormButton';
 import {useState} from 'react'
 import './style.css'
 import { postData } from '../../apis';
-import { getData } from '../../apis';
 const { TextArea } = Input;
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
-  function FormComp({clickHanddler}) {
+  function FormComp({clickHanddler,setSortedData,customSort}) {
     const [item,setItem]= useState({
         title:'',
         description:'',
@@ -26,7 +25,7 @@ const { TextArea } = Input;
            )
     }
     const onFinish = () => {
-      postData({clickHanddler,item})
+      postData({clickHanddler,item,setSortedData,customSort})
 
       };
   return (
