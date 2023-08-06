@@ -5,20 +5,21 @@ const handleChange = (value) => {
 const data = [
      
     {
-      label: 'Jack',
-      value: 'jack',
+      label: 'Critical Task',
+      value: 'Critical Task',
     },
     {
-      label: 'Lucy',
-      value: 'lucy',
+      label: 'Urgent task',
+      value: 'Urgent task',
     },
     {
-      label: 'yiminghe',
-      value: 'Yiminghe',
+      label: 'Normal Task',
+      value: 'Normal Task',
     },
+    
   
 ]
-function FormSelect({defualtvalue='luky',width='200px',onchange={handleChange},options=data}) {
+function FormSelect({defualtvalue='Critical Task',width='200px',onchange={handleChange},options=data}) {
   return (
  <div> <Select
     defaultValue={defualtvalue}

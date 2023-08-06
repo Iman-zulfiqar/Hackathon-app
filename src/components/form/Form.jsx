@@ -1,15 +1,44 @@
 import {  Form, Input } from 'antd';
 import FormSelect from './FormSelect';
 import FormButton from './FormButton';
+import {useState} from 'react'
 import './style.css'
+import  data from '../../data/data.json'
 const { TextArea } = Input;
-const onFinish = (values) => {
-    console.log('Success:', values);
-  };
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-function FormComp() {
+
+  function FormComp() {
+    const [item,setItem]= useState({
+        title:'',
+        description:'',
+        priority:''
+    });
+    const [newList,setList]=useState([])
+    function priorityHanddler(e) {
+        setItem((prev)=>({
+            ...prev,
+            priority:e
+   
+           })  
+           )
+    }
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        fetch('data.json', {  
+        method: 'POST', 
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+        mode: 'cors', 
+        body: JSON.stringify(item) 
+    })
+    setList(data);
+      
+      };
   return (
     <Form
     name="basic"
@@ -41,7 +70,14 @@ function FormComp() {
       ]}
       style={{overflow:'visible'}}
     >
-      <Input />
+      <Input onChange={(e)=>{
+        setItem((prev)=>({
+            ...prev,
+            title:e.target.value
+   
+           })  
+           )
+      }} />
     </Form.Item>
 
     <Form.Item
@@ -55,15 +91,22 @@ function FormComp() {
       ]}
       style={{overflow:'visible'}}
     >
-      <TextArea rows={4} />
+      <TextArea rows={4} onChange={(e)=>{
+        setItem((prev)=>({
+         ...prev,
+         description:e.target.value
+
+        })  
+        )
+      }}/>
     </Form.Item>
      
      
     <Form.Item
       label="Priority"
-      name="Priority"
+      name="priority"
     >
-      <FormSelect  />
+      <FormSelect onchange={priorityHanddler} />
     </Form.Item>
 
     <FormButton 

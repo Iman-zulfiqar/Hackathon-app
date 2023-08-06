@@ -2,7 +2,22 @@ import { useState, useEffect } from "react";
 import ListItem from "../../../components/list/ListItem";
 import MenuDropdown from "../../../components/list/MenuDropdown";
 function TodoListComp() {
-  const [data, setData]=useState([]);
+
+  const [sortedData, setSortedData]=useState([]);
+  function customSort (task1, task2) 
+     {
+      return priorities[task1.priority] - priorities[task2.priority];
+  }
+let  priorities = 
+{
+  'urgent' : 0, 
+  'critical' : 1,
+  'normal' : 2,
+
+}
+
+
+  
   const items = [
    {
      label: <a href="https://www.antgroup.com">Delete</a>,
@@ -30,8 +45,8 @@ function TodoListComp() {
          return response.json();
        })
        .then(function(myJson) {
-         console.log(myJson);
-         setData(myJson)
+         console.log( myJson);
+         setSortedData(myJson.sort(customSort))
        });
    }
    useEffect(()=>{
@@ -39,7 +54,7 @@ function TodoListComp() {
    },[])
   return (
     <div className="w-[80%] bg-[#d3d3d3] rounded-2xl mx-auto gap-x-4 flex flex-wrap p-8 shadow-md gap-y-2" style={{height:'70vh'}}>
-       { data.map((item, index)=>{
+       { sortedData.map((item, index)=>{
         return  <ListItem key={index} title={item.title}
         extra= {<MenuDropdown options={{items}} />}
         width='300px' 

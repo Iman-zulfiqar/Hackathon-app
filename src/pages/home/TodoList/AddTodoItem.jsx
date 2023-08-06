@@ -20,6 +20,7 @@ function AddTodoItem() {
        textcolor='white'
        borderstyles='1px solid grey'
        clickHanddler={clickHanddler}
+       
       />
       <Modal
         title="Add Todo Item"
