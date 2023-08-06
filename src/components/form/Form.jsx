@@ -102,7 +102,7 @@ const { TextArea } = Input;
       label="Priority"
       name="priority"
     >
-      <FormSelect initialValues={priorityValue} onchange={priorityHanddler} />
+      <FormSelect  onchange={priorityHanddler} />
     </Form.Item>
 
     <FormButton 

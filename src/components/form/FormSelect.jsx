@@ -19,7 +19,7 @@ const data = [
     
   
 ]
-function FormSelect({defualtvalue='critical',width='200px',onchange={handleChange},options=data}) {
+function FormSelect({defualtvalue='Select',width='200px',onchange={handleChange},options=data}) {
   return (
  <div> <Select
     defaultValue={defualtvalue}
