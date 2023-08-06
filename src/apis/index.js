@@ -1,16 +1,33 @@
-export const genericInstance = ({Method,payload})=>{
-    fetch('data.json', {  
-    
-        method: Method, 
-        mode: 'cors', 
+const base_url='https://63aaa3b8fdc006ba6047ae79.mockapi.io/todos';
+
+export const getData = ({setSortedData,customSort})=>{
+    fetch(`${base_url}`
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    )
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(myJson) {
+        setSortedData(myJson.sort(customSort))
+      });
+}
+
+export const postData = ({clickHanddler,item})=>{
+    fetch('https://63aaa3b8fdc006ba6047ae79.mockapi.io/todos', {  
+        method: 'POST', 
         headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
            },
-           if(Method === 'POST')
-           { 
-            body: JSON.stringify(payload) 
-          }
-    
-      })
+        mode: 'cors', 
+        body: JSON.stringify(item) 
+    }).then(()=>{
+        clickHanddler();
+    }
+    )
 }

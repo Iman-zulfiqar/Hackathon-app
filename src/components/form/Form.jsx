@@ -3,20 +3,20 @@ import FormSelect from './FormSelect';
 import FormButton from './FormButton';
 import {useState} from 'react'
 import './style.css'
-import  data from '../../data/data.json'
+import { postData } from '../../apis';
+import { getData } from '../../apis';
 const { TextArea } = Input;
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
-  function FormComp() {
+  function FormComp({clickHanddler}) {
     const [item,setItem]= useState({
         title:'',
         description:'',
         priority:''
     });
-    const [newList,setList]=useState([])
     function priorityHanddler(e) {
         setItem((prev)=>({
             ...prev,
@@ -25,19 +25,9 @@ const { TextArea } = Input;
            })  
            )
     }
-    const onFinish = (values) => {
-        console.log('Success:', values);
-        fetch('data.json', {  
-        method: 'POST', 
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           },
-        mode: 'cors', 
-        body: JSON.stringify(item) 
-    })
-    setList(data);
-      
+    const onFinish = () => {
+      postData({clickHanddler,item})
+
       };
   return (
     <Form

@@ -1,4 +1,3 @@
-
 import NavbarComp from "./navbar/NavbarComp"
 import {  Input } from 'antd';
 import {useState} from 'react'

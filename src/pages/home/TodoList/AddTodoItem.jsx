@@ -8,7 +8,7 @@ function AddTodoItem() {
 
   const [modal2Open, setModal2Open] = useState(false);
   function clickHanddler() {
-    setModal2Open(true);
+    setModal2Open(!modal2Open);
   }
   return (
     <>
@@ -20,7 +20,8 @@ function AddTodoItem() {
        textcolor='white'
        borderstyles='1px solid grey'
        clickHanddler={clickHanddler}
-       
+
+
       />
       <Modal
         title="Add Todo Item"
@@ -29,7 +30,7 @@ function AddTodoItem() {
         onOk={() => setModal2Open(false)}
         onCancel={() => setModal2Open(false)}
       >
-       <FormComp/>
+       <FormComp clickHanddler={clickHanddler}/>
       </Modal>
     </>
   )

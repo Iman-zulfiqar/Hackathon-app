@@ -6,20 +6,20 @@ const data = [
      
     {
       label: 'Critical Task',
-      value: 'Critical Task',
+      value: 'critical',
     },
     {
       label: 'Urgent task',
-      value: 'Urgent task',
+      value: 'urgent',
     },
     {
       label: 'Normal Task',
-      value: 'Normal Task',
+      value: 'normal',
     },
     
   
 ]
-function FormSelect({defualtvalue='Critical Task',width='200px',onchange={handleChange},options=data}) {
+function FormSelect({defualtvalue='critical',width='200px',onchange={handleChange},options=data}) {
   return (
  <div> <Select
     defaultValue={defualtvalue}
