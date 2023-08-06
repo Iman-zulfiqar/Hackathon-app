@@ -18,7 +18,8 @@ titleFontSize
       
       style={{
         maxWidth: width,
-        wisth:'100%',
+        minWidth:'200px',
+        width:'100%',
         background:bgcolor,
         fontSize:`calc(${titleFontSize} + .3vw)`
       }}

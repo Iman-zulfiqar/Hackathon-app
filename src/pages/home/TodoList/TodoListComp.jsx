@@ -2,11 +2,11 @@
 import ListItem from "../../../components/list/ListItem";
 import MenuDropdown from "../../../components/list/MenuDropdown";
 import DeleteModalComp from "../../../components/modal/deleteModalComp";
+import EditModal from "../../../components/modal/EditModal";
 import {useState} from 'react';
 function TodoListComp({ListData,customSort,setSortedData}) {
   const [open, setOpen] = useState(false);
   const [openEdit, setEditOpen] = useState(false);
- 
   const items = [
     {
       label: <p onClick={()=>{
@@ -30,12 +30,12 @@ function TodoListComp({ListData,customSort,setSortedData}) {
   return (
  <>
       <DeleteModalComp open={open} setOpen={setOpen} setSortedData={setSortedData} customSort={customSort}/>
+       <EditModal modal2Open={openEdit} setModal2Open={setEditOpen} setSortedData={setSortedData} customSort={customSort}/>
     <div className="w-[80%] bg-[#d3d3d3] rounded-2xl mx-auto gap-x-4 flex flex-wrap p-8 shadow-md gap-y-2" style={{height:'70vh'}}>
        {ListData.length !=0 ? ListData.map((item, index)=>{
-  
-          
+        
         return  <ListItem key={index} title={item.title}
-        extra= {<MenuDropdown id={item.id} options={{items}} />}
+        extra= {<MenuDropdown id={item.id} options={{items}} data={item} />}
         width='300px' 
         titleFontSize='12px'
         contentFontSize='10px'
@@ -47,7 +47,7 @@ function TodoListComp({ListData,customSort,setSortedData}) {
           }else if (item.priority == 'normal'){
                   return '#008000'
           }
-          else {
+          else if(item.priority =="urgent") {
             return '#ffff62'
           }
         })()}></ListItem>

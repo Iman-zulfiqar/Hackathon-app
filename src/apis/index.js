@@ -47,3 +47,23 @@ export const deleteData = ({setOpen,setSortedData,customSort})=>{
     }
     )
 }
+
+
+export const updateData = ({clickHanddler,item,setSortedData,customSort})=>{
+    const id = localStorage.getItem('id');
+    fetch(`https://63aaa3b8fdc006ba6047ae79.mockapi.io/todos/${id}`, {  
+        method: 'PUT', 
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+        mode: 'cors', 
+        body: JSON.stringify(item) 
+    }).then(()=>{
+        getData({setSortedData,customSort});
+    }
+    ).then(()=>{
+        clickHanddler();
+    }
+    )
+}

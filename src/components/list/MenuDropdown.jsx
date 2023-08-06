@@ -18,14 +18,14 @@ const items = [
   },
 ];
 
-function MenuDropdown({options={items},width='100px',id}) {
+function MenuDropdown({options={items},width='100px',id,data}) {
   return (
     <Dropdown
     menu= {options}
     trigger={['click']}
     style={{width:width}}
   >
-    <a onClick={(e) => {e.preventDefault(); localStorage.setItem('id',id);}}>
+    <a onClick={(e) => {e.preventDefault(); localStorage.setItem('id',id); localStorage.setItem('data',JSON.stringify(data));}}>
       <Space>
     
         <MoreOutlined />

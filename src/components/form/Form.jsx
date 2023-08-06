@@ -10,7 +10,7 @@ const { TextArea } = Input;
     console.log('Failed:', errorInfo);
   };
 
-  function FormComp({clickHanddler,setSortedData,customSort}) {
+  function FormComp({clickHanddler,setSortedData,customSort,descriptionValue,titleValue,priorityValue,ApiInstance,required=true}) {
     const [item,setItem]= useState({
         title:'',
         description:'',
@@ -25,8 +25,8 @@ const { TextArea } = Input;
            )
     }
     const onFinish = () => {
-      postData({clickHanddler,item,setSortedData,customSort})
-
+      ApiInstance({clickHanddler,item,setSortedData,customSort})
+       
       };
   return (
     <Form
@@ -53,19 +53,23 @@ const { TextArea } = Input;
       name="Title"
       rules={[
         {
-          required: true,
+          required: required ,
           message: 'required',
         },
       ]}
       style={{overflow:'visible'}}
     >
-      <Input onChange={(e)=>{
+      <Input 
+      initialValues={titleValue}
+      id='title'
+      onChange={(e)=>{
         setItem((prev)=>({
             ...prev,
             title:e.target.value
    
            })  
            )
+             
       }} />
     </Form.Item>
 
@@ -74,13 +78,16 @@ const { TextArea } = Input;
       name="description"
       rules={[
         {
-          required: true,
+          required: required,
           message: 'required',
         },
       ]}
       style={{overflow:'visible'}}
     >
-      <TextArea rows={4} onChange={(e)=>{
+      <TextArea rows={4} 
+      id='textArea'
+      initialValues={descriptionValue}
+      onChange={(e)=>{
         setItem((prev)=>({
          ...prev,
          description:e.target.value
@@ -95,7 +102,7 @@ const { TextArea } = Input;
       label="Priority"
       name="priority"
     >
-      <FormSelect onchange={priorityHanddler} />
+      <FormSelect initialValues={priorityValue} onchange={priorityHanddler} />
     </Form.Item>
 
     <FormButton 

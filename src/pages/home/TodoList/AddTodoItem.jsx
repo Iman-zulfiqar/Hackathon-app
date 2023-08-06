@@ -1,10 +1,9 @@
 import { useState } from "react";
 import FormButton from '../../../components/form/FormButton'
 import {PlusCircleOutlined } from  '@ant-design/icons'
-import {  Modal } from 'antd';
-
-import FormComp from "../../../components/form/Form";
-function AddTodoItem({customSort,setSortedData}) {
+import ModalComp from "../../../components/form/ModalComp";
+import { postData } from "../../../apis";
+function AddTodoItem({customSort,setSortedData,titleValue,descriptionValue,priorityValue}) {
 
   const [modal2Open, setModal2Open] = useState(false);
   function clickHanddler() {
@@ -20,18 +19,12 @@ function AddTodoItem({customSort,setSortedData}) {
        textcolor='white'
        borderstyles='1px solid grey'
        clickHanddler={clickHanddler}
-
-
+  
       />
-      <Modal
-        title="Add Todo Item"
-        centered
-        open={modal2Open}
-        onOk={() => setModal2Open(false)}
-        onCancel={() => setModal2Open(false)}
-      >
-       <FormComp clickHanddler={clickHanddler} setSortedData={setSortedData} customSort={customSort}/>
-      </Modal>
+      <ModalComp  title="Add Todo Item" modal2Open={modal2Open} setModal2Open={setModal2Open} clickHanddler={clickHanddler} setSortedData={setSortedData} 
+       customSort={customSort}
+       ApiInstance={postData}
+       />
     </>
   )
 }
