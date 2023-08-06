@@ -53,7 +53,7 @@ useEffect(()=>{
          setSortedData(myJson.sort(customSort))
        });
    }
-   const ListData = filteredData.length != 0 ? filteredData : sortedData
+   const ListData = (filteredData.length != 0 && searchValue != '') ? filteredData : sortedData
    useEffect(()=>{
      getData()
    },[])
