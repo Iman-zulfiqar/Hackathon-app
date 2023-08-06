@@ -1,13 +1,40 @@
 import NavbarComp from "./navbar/NavbarComp"
 import {  Input } from 'antd';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import TodoListComp from "./TodoList/TodoListComp";
 import AddTodoItem from './TodoList/AddTodoItem'
+import { getData } from "../../apis";
 import './style.css'
 const { Search } = Input;
 function TodoList() {
   const [searchValue, setSearchValue]= useState();
+  const [sortedData, setSortedData]=useState([]);
+  const [filteredData,setfilteredData]= useState([]);
   const onSearch = (value) =>{ setSearchValue(value)};
+  let  priorities = 
+  {
+    'urgent' : 1, 
+    'critical' : 0,
+    'normal' : 2,
+  
+  }
+  const ListData = (searchValue ) ? filteredData : sortedData
+  function customSort (task1, task2) 
+     {
+      return priorities[task1.priority] - priorities[task2.priority];
+  }
+useEffect(()=>{
+ if (searchValue != '') {
+ const data= sortedData.filter((item)=>{
+    return  item.title.includes(searchValue) || item.description.includes(searchValue)
+  })
+  setfilteredData(data);
+  }
+},[searchValue])
+ 
+   useEffect(()=>{
+     getData({setSortedData,customSort})
+   },[])
   return (
    <>  <NavbarComp></NavbarComp>
     <div className="h-[90vh] flex flex-col justify-center gap-4 items-center">
@@ -16,7 +43,7 @@ function TodoList() {
         
         <AddTodoItem/>
         </div>
-       <TodoListComp searchValue={searchValue} />
+       <TodoListComp ListData={ListData} />
        
      
     </div></>
