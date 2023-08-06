@@ -34,3 +34,20 @@ export const postData = ({clickHanddler,item,setSortedData,customSort})=>{
     }
     )
 }
+
+export const deleteData = ({clickHanddler,id,setSortedData,customSort})=>{
+    fetch(`${base_url}:${id}`, {  
+        method: 'DELETE', 
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+        mode: 'cors', 
+    }).then(()=>{
+        getData({setSortedData,customSort});
+    }
+    ).then(()=>{
+        clickHanddler();
+    }
+    )
+}

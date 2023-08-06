@@ -1,24 +1,31 @@
 
 import ListItem from "../../../components/list/ListItem";
 import MenuDropdown from "../../../components/list/MenuDropdown";
-
+import DeleteModalComp from "../../../components/modal/deleteModalComp";
+import {useState} from 'react';
 function TodoListComp({ListData}) {
-
+  const [open, setOpen] = useState(false);
   const items = [
     {
-      label: <a href="https://www.antgroup.com">Delete</a>,
+      label: <p onClick={()=>{
+        setOpen(!open)
+      }}>Delete</p>,
       key: '0',
     },
     {    type: 'divider',
     },
     {
-      label: <a href="https://www.aliyun.com">Edit</a>,
+      label: <p onClick={()=>{
+        setOpen(!open)
+      }}>Edit</p>,
       key: '2',
     },
     
   ];
 
   return (
+ <>
+      <DeleteModalComp open={open} setOpen={setOpen}/>
     <div className="w-[80%] bg-[#d3d3d3] rounded-2xl mx-auto gap-x-4 flex flex-wrap p-8 shadow-md gap-y-2" style={{height:'70vh'}}>
        {ListData.length !=0 ? ListData.map((item, index)=>{
         return  <ListItem key={index} title={item.title}
@@ -39,6 +46,7 @@ function TodoListComp({ListData}) {
         })()}></ListItem>
        }): <p>No data found please try with exact case...</p>}
        </div>
+       </>
   )
 }
 
