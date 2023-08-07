@@ -9,9 +9,9 @@ function EditModal({modal2Open,setSortedData,customSort,setModal2Open}) {
     <div>
          <ModalComp  title="Add Todo Item" modal2Open={modal2Open} setModal2Open={setModal2Open} clickHanddler={clickHanddler} setSortedData={setSortedData} 
        customSort={customSort}
-       titleValue={JSON.parse(localStorage.getItem('data')).title}
-       descriptionValue={JSON.parse(localStorage.getItem('data')).description}
-       priorityValue={JSON.parse(localStorage.getItem('data')).priority}
+       titleValue={JSON.parse(localStorage.getItem('data'))?.title}
+       descriptionValue={JSON.parse(localStorage.getItem('data'))?.description}
+       priorityValue={JSON.parse(localStorage.getItem('data'))?.priority}
        ApiInstance={updateData}
        required={false}
        />
